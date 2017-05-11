@@ -13,15 +13,17 @@ function KNNChars()
 	%get all images in a folder belonging to a class as a row matrix of observations
     function [data, classinfo] = loadClassTrainingData(type, class, classData, classindex)
         samples = dir(strcat('samples/', type, '/', class));
-        samples = samples(3:end);
         sample_range = min([20, size(samples, 1)]);
         
         data = zeros(sample_range, 32^2);
         classinfo = classData;
         for j = 1:sample_range
-        
-            classinfo = [classinfo; classindex];
-            data(j, :) = get_imag_as_row_vec(['samples\\', type, '\\', class, '\\', samples(j).name]);
+            filename = ['samples\\', type, '\\', class, '\\', samples(j).name];
+            
+            if(isdir(filename))
+                classinfo = [classinfo; classindex];
+                data(j, :) = get_imag_as_row_vec(filename);
+            end
         end
     end
 
