@@ -86,7 +86,7 @@ function KNNChars()
     end
 
 	%create matrix of observations and corresponding training targets
-    type = 'written';
+    type = 'typed';
     trainingClass = dir(['samples/', type]);
     trainingClass = trainingClass([1:26, 29:end]);
     
@@ -113,13 +113,15 @@ function KNNChars()
         dataTest(i, :) = get_imag_as_row_vec(filename);
     end
     
-    test_results = Nearest_Neighbor(observations', classinfo', dataTest', 1);%dataTest', 1);
-    
-    for i = 1:size(test_results, 2)
-        disp([num2str(test_results(1, i)), ' ', classes{test_results(1, i), 1}, ' ', classes{i, 1}, ' ', num2str(i)])
+    for i = 1:20
+        test_results = Nearest_Neighbor(observations', classinfo', dataTest', i);
+
+        %for i = 1:size(test_results, 2)
+            %disp([num2str(test_results(1, i)), ' ', classes{test_results(1, i), 1}, ' ', classes{i, 1}, ' ', num2str(i)])
+        %end
+
+        %Compute error
+        err_rate = count_errors(test_results, targets) / size(test_results, 2);
+        disp(err_rate)
     end
-    
-	%Compute error
-    err_rate = count_errors(test_results, targets) / size(test_results, 2);
-    disp(err_rate)
 end
