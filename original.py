@@ -95,7 +95,7 @@ def processImage(im, length):
 #outputs to same directory as folder
 	
 for imgFolder in sys.argv[1:]:
-	outDir = imgFolder + "Processed32"
+	outDir = "F:\Optical_Character_Recognition\\"+imgFolder + "Processed64"
 	
 	if not os.path.exists(outDir):
 		os.makedirs(outDir)

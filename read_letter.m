@@ -20,6 +20,7 @@ comp=[ ];
 end
 
 vd=find(comp==max(comp));
+
 %*-*-*-*-*-*-*-*-*-*-*-*-*-
 if vd==1
     letter='A';
